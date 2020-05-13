@@ -1,1 +1,116 @@
+<html>
+<head>
+    <style type="text/css">
+        body {
+            color: purple;
+            background-color: #ffddcc }
+    
+        .spoiler, .spoiler2{ 
+            color: black; 
+            background-color:black;
+        }
+
+        .spoiler:hover{
+            color: white;
+        }
+
+        .spoiler2:hover { 
+            background-color:white; 
+        }
+  </style>
+</head>
+
+<body>
 <h1>Hello</h1>
+
+<script>
+    function isEmpty(obj) {
+        for(var key in obj) {
+            if(obj.hasOwnProperty(key))
+                return false;
+            }
+                return true;
+    }
+    
+    function readCovidJson(){
+            if(this.readyState == 4 && this.status == 200){
+                var jsonn = JSON.parse(this.responseText);
+                if(isEmpty(jsonn)){
+                    window.alert("Tara invalida");
+                }
+                else {
+                    var lastElement = jsonn[jsonn.length-1];
+                    var country = lastElement.Country;
+                    document.getElementById('country').innerHTML = country;
+                
+                    var confirmed = lastElement.Confirmed;
+                    document.getElementById('confirmed').innerHTML = confirmed;
+                
+                    var deaths = lastElement.Deaths;
+                    document.getElementById('deaths').innerHTML = deaths;
+                
+                    var recovered = lastElement.Recovered;
+                    document.getElementById('recovered').innerHTML = recovered;
+                
+                    var active = lastElement.Active;
+                    document.getElementById('active').innerHTML = active;
+                }
+            }
+    }
+    
+    function importCountry(){
+        var countryInput = document.getElementById("countryInput").value;
+        
+        var xhr = new XMLHttpRequest();
+        xhr.overrideMimeType("application/json");
+        xhr.onreadystatechange = readCovidJson;
+        xhr.open("POST", "/country", true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.send(JSON.stringify({country: countryInput}));
+        console.log(xhr);
+        
+    }
+    
+    function readJoke(){
+            if(this.readyState == 4 && this.status == 200){
+                var jsonn = JSON.parse(this.responseText);
+                var jokeSetup = jsonn[0].setup;
+                document.getElementById('jokeSetup').innerHTML = jokeSetup;
+                
+                var jokePunchline = jsonn[0].punchline;
+                document.getElementById('jokePunchline').innerHTML = jokePunchline;
+                }
+    }
+    
+    function importJoke(){
+        var xhr = new XMLHttpRequest();
+        xhr.overrideMimeType("application/json");
+        xhr.onreadystatechange = readJoke;
+        xhr.open("POST", "/joke", true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.send(null);
+    }
+</script>
+
+<input type="text" id="countryInput" name="search">
+<button onclick="importCountry()">Search</button>
+
+<br><br>
+<label style="color:red"> Tara selectata: </label>
+<label id="country"> ---- </label><br><br>
+<label style="color:purple"> Numar cazuri confirmate: </label>
+<label id="confirmed"> ---- </label><br>
+<label style="color:purple"> Numar decese: </label>
+<label id="deaths"> ---- </label><br>
+<label style="color:purple"> Numar persoane însănătoşite: </label>
+<label id="recovered"> ---- </label><br>
+<label style="color:purple"> Numar cazuri active: </label>
+<label id="active"> ---- </label><br>
+
+<br><br><br><br><br><br><br>
+<button onclick="importJoke()">Spune-mi o gluma</button><br>
+<label id="jokeSetup"> </label><br>
+<span class="spoiler2"> <label id="jokePunchline">              </label> </span>
+
+</body>
+</html>

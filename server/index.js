@@ -57,7 +57,7 @@ app.post('/joke', (req,res) => {
     myRequest.send(null);
 
 })
-app.listen(8080)
+app.listen(8080, () => console.log('App is now listening on port: 8080'));
 
 /*app.post('/conectare', (req,res) => {
     //console.log("test ip");

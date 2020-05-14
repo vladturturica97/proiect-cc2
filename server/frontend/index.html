@@ -2,8 +2,16 @@
 <head>
     <style type="text/css">
         body {
-            color: purple;
-            background-color: #ffddcc }
+            display: flex;
+          flex-direction: column;
+          height: 93vh;
+          justify-content: center;
+          align-items: center;
+          background: #222;
+          color: #eee;
+          font-family: "Dosis", sans-serif; 
+            
+        }
     
         .spoiler, .spoiler2{ 
             color: black; 
@@ -17,11 +25,104 @@
         .spoiler2:hover { 
             background-color:white; 
         }
+        .underlined-a {
+              text-decoration: none;
+              color: aqua;
+              padding-bottom: 0.15em;
+              box-sizing: border-box;
+              box-shadow: inset 0 -0.2em 0 aqua;
+              transition: 0.2s;
+        }
+        .underlined-a:hover {
+            color: #222;
+            box-shadow: inset 0 -2em 0 aqua;
+            transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+
+        .brk-btn {
+  position: relative;
+  background: none;
+  color: aqua;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 0.2em solid aqua;
+  padding: 0.5em 1em;
+            
+    }
+  
+  
+  .brk-btn:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10%;
+    background: #222;
+    height: 0.3em;
+    right: 20%;
+    top: -0.21em;
+    transform: skewX(-45deg);
+    -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+  .brk-btn:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10%;
+    background: #222;
+    height: 0.3em;
+    left: 20%;
+    bottom: -0.25em;
+    transform: skewX(45deg);
+    -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+  .brk-btn:hover::before {
+      right: 80%;
+    }
+   .brk-btn:hover::after {
+      left: 80%;
+    }
+
+    p {
+	font-size: 14;
+	font-weight: 400;
+	line-height: 2;
+	margin-bottom: 1.5em;
+	color: #fcfcfc;
+	text-align: center;
+    }
+    /*h1 {
+	font-size: calc(2.8em + 2.6vw);
+	font-weight: 700;
+	letter-spacing: .01em;
+	padding: 10rem 0 0 4.5rem;
+	text-shadow: .022em .022em .022em #111;
+	color: #fff;
+    }*/
+    header {
+    position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      text-align: center;
+    }
+    
+    footer {
+        position: fixed;
+        text-align: right;
+        height: 50px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin-bottom: 0px;
+    }
   </style>
 </head>
-
+<header><h1>O pagina serioasa, dar si cu glume</h1></header>
 <body>
-<h1>Hello</h1>
+
 
 <script>
     function isEmpty(obj) {
@@ -92,25 +193,29 @@
     }
 </script>
 
-<input type="text" id="countryInput" name="search">
-<button onclick="importCountry()">Search</button>
+<p>
+Va rog introduceti in caseta de mai jos o tara ca sa aflati detalii despre numarul de cazuri de Coronavirus.<br>
+<input type="text" id="countryInput" name="search">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button onclick="importCountry()" class="brk-btn">Search</button><br>
 
-<br><br>
-<label style="color:red"> Tara selectata: </label>
-<label id="country"> ---- </label><br><br>
-<label style="color:purple"> Numar cazuri confirmate: </label>
-<label id="confirmed"> ---- </label><br>
-<label style="color:purple"> Numar decese: </label>
-<label id="deaths"> ---- </label><br>
-<label style="color:purple"> Numar persoane însănătoşite: </label>
-<label id="recovered"> ---- </label><br>
-<label style="color:purple"> Numar cazuri active: </label>
-<label id="active"> ---- </label><br>
+        <label style="color:#c96208" > Tara selectata: </label>
+        <label id="country" class="underlined-a">  </label><br>
+        <label style="color:#c96208" > Numar cazuri confirmate: </label>
+        <label id="confirmed" class="underlined-a">  </label><br>
+        <label style="color:#c96208" > Numar decese: </label>
+        <label id="deaths" class="underlined-a">  </label><br>
+        <label style="color:#c96208"> Numar persoane însănătoşite: </label>
+        <label id="recovered" class="underlined-a">  </label><br>
+        <label style="color:#c96208"> Numar cazuri active: </label>
+        <label id="active" class="underlined-a" >  </label><br><br><br><br><br>
+    </p>
 
-<br><br><br><br><br><br><br>
-<button onclick="importJoke()">Spune-mi o gluma</button><br>
-<label id="jokeSetup"> </label><br>
-<span class="spoiler2"> <label id="jokePunchline">              </label> </span>
+    <p>
+        <button onclick="importJoke()" class="brk-btn">Spune-mi o gluma</button><br>
+        <label id="jokeSetup"> </label><br>
+        <span class="spoiler2"> <label id="jokePunchline">              </label> </span>
+    </p>
 
 </body>
+    <footer>Proiect realizat de Vlad Turturica, SIMPRE, grupa 1099</footer>
 </html>
